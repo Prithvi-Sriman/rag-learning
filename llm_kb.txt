@@ -1,0 +1,29 @@
+Large Language Models (LLMs) are a type of artificial intelligence trained on massive amounts of text data. They learn to predict the next word in a sequence, which forces them to develop a deep understanding of language, facts, and reasoning. Examples include GPT-4, Claude, and Gemini.
+
+The Transformer architecture, introduced in the 2017 paper "Attention Is All You Need" by Vaswani et al., is the foundation of all modern LLMs. It replaced older recurrent neural networks (RNNs) by using a mechanism called self-attention, which allows the model to relate any word in a sentence to any other word regardless of distance.
+
+Tokenization is the process of converting raw text into smaller units called tokens before feeding it to an LLM. A token is roughly 3-4 characters or about 0.75 words on average. The sentence "Hello world" might be split into tokens like ["Hello", " world"]. LLMs never see raw characters — only token IDs.
+
+The self-attention mechanism allows a model to weigh how important each token is relative to every other token in the input. For example, in the sentence "The cat sat on the mat because it was tired", self-attention helps the model figure out that "it" refers to "the cat" and not "the mat".
+
+LLMs are pretrained on enormous text corpora — Common Crawl, Wikipedia, books, code, and web pages — using a process called next-token prediction (also called causal language modeling). This phase can take weeks on thousands of GPUs and costs millions of dollars. The result is a base model that knows a lot but doesn't follow instructions well.
+
+After pretraining, models are fine-tuned to follow human instructions using a technique called Supervised Fine-Tuning (SFT). The model is trained on curated examples of (prompt, ideal response) pairs. This is what makes a raw base model into a useful assistant that answers questions helpfully.
+
+Reinforcement Learning from Human Feedback (RLHF) is a technique used to align LLMs with human preferences. Human raters compare multiple model outputs and rank them. A reward model is trained on these rankings, and the LLM is then optimized to produce outputs the reward model scores highly. This process shapes the model's tone, helpfulness, and safety behavior.
+
+Embeddings are dense numerical vectors that represent the meaning of text. An embedding model converts a sentence into a list of numbers (e.g., 768 or 1536 floats). Semantically similar sentences end up with similar vectors, which means you can measure meaning similarity using math like cosine similarity.
+
+The context window is the maximum number of tokens an LLM can process in a single call. Older models had context windows of 2048 tokens. Modern models support 128K or even 1 million tokens. Everything outside the context window is invisible to the model — it cannot "remember" previous conversations unless they are included in the current prompt.
+
+Hallucination is when an LLM confidently generates text that is factually wrong. This happens because the model is trained to predict plausible-sounding tokens, not to retrieve verified facts. For example, an LLM might confidently cite a research paper that doesn't exist.
+
+Retrieval-Augmented Generation (RAG) is a technique that addresses hallucination by giving the LLM access to a relevant external knowledge base at inference time. Instead of relying only on what's baked into the model's weights, RAG retrieves relevant passages and includes them in the prompt. This grounds the model's response in real documents.
+
+Temperature is a parameter that controls how random an LLM's outputs are. At temperature 0, the model always picks the most likely next token (deterministic). At higher temperatures (e.g., 1.0 or above), the model samples more randomly and produces more creative or varied responses. Most production systems use a temperature between 0 and 0.7.
+
+Parameters are the numerical weights inside an LLM that are learned during training. A model's size is often described by its parameter count — GPT-3 had 175 billion parameters, while smaller models like LLaMA 3 8B have 8 billion. More parameters generally means more capacity to store knowledge, but also higher memory and compute requirements.
+
+Quantization is a technique to reduce the memory footprint of LLMs by representing their weights in lower precision formats (e.g., int8 or int4 instead of float32). A 7B parameter model in float32 needs ~28GB of VRAM, but in 4-bit quantization it fits in ~4GB. This makes it possible to run large models on consumer GPUs.
+
+Prompting is the practice of crafting the text input to an LLM to guide its output. Techniques include zero-shot prompting (just asking a question), few-shot prompting (providing examples in the prompt), chain-of-thought prompting (asking the model to reason step by step), and system prompts (instructions that set the model's behavior and persona).
