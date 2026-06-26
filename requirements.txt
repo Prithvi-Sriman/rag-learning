@@ -3,4 +3,4 @@ sentence-transformers>=4.1.0
 transformers>=4.40.0
 jupyter
 ipykernel
-faiss-gpu-cu12
+faiss-cpu
